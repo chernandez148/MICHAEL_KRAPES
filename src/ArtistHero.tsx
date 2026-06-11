@@ -59,7 +59,7 @@ export default function ArtistHero() {
                     >
                         <span className="w-1.5 h-1.5 rounded-full bg-[#c8a96e] shrink-0" />
                         <span className="font-outfit text-[9px] sm:text-[10px] font-normal tracking-[0.2em] sm:tracking-[0.22em] uppercase text-white/60">
-                            Mixed Media · Los Angeles
+                            Nxthing Is Made · CA
                         </span>
                     </div>
 
