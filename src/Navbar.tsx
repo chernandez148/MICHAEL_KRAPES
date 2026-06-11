@@ -13,7 +13,7 @@ export default function Navbar() {
         (state: { cart: { items: unknown[] } }) => state.cart.items.length
     );
 
-    const navItems = ["Home", "Gallery", "Commissions", "Collections", "About", "Contact"];
+    const navItems = ["Home", "Gallery", "Commissions", "Shop", "About", "Contact"];
 
     // Refined Dark Color Palette for Sub-routes (Replacing harsh stark white)
     const theme = {
@@ -99,8 +99,8 @@ export default function Navbar() {
             <div
                 onClick={() => setIsOpen(false)}
                 className={`fixed inset-0 z-50 transition-opacity duration-500 ease-in-out md:hidden ${isOpen
-                        ? "bg-black/70 backdrop-blur-xs opacity-100 pointer-events-auto"
-                        : "opacity-0 pointer-events-none"
+                    ? "bg-black/70 backdrop-blur-xs opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
                     }`}
             />
 

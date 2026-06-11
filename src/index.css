@@ -1,1 +1,163 @@
+/* 1. External fonts MUST be at the very top */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@200;300;400;500&display=swap');
+
+/* 2. Then import Tailwind */
 @import "tailwindcss";
+
+/* 3. Define CSS variables for custom fonts */
+:root {
+    --font-bebas: 'Bebas Neue', sans-serif;
+    --font-outfit: 'Outfit', sans-serif;
+}
+
+/* ── Your remaining custom utility classes below ── */
+.font-bebas {
+    font-family: var(--font-bebas);
+}
+
+.font-outfit {
+    font-family: var(--font-outfit);
+}
+
+/* ── CUSTOM ARTWORK GLOBAL KEYFRAMES ── */
+@keyframes imgReveal {
+    from {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes stripeIn {
+    from {
+        transform: scaleY(0);
+    }
+
+    to {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes nameIn {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes accentIn {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scrollPulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scaleY(1);
+    }
+
+    50% {
+        opacity: 0.9;
+        transform: scaleY(1.15);
+    }
+}
+
+@keyframes ambientGrid {
+
+    0%,
+    100% {
+        opacity: 0.12;
+    }
+
+    50% {
+        opacity: 0.22;
+    }
+}
+
+@keyframes contentReveal {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes borderExpand {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* ── DESIGN ENGINE UTILITY CLASSES ── */
+.font-bebas {
+    font-family: var(--font-bebas);
+}
+
+.font-outfit {
+    font-family: var(--font-outfit);
+}
+
+.animate-reveal {
+    animation: contentReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.input-field {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    font-family: var(--font-outfit);
+    font-size: 13px;
+    font-weight: 300;
+    padding: 12px 0;
+    color: rgba(255, 255, 255, 0.9);
+    outline: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.input-field:focus {
+    border-bottom-color: #c8a96e;
+    padding-left: 4px;
+}
+
+.input-field:focus+label {
+    color: #c8a96e;
+}
