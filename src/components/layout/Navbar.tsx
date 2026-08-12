@@ -13,7 +13,7 @@ export default function Navbar() {
         (state: { cart: { items: unknown[] } }) => state.cart.items.length
     );
 
-    const navItems = ["Home", "Gallery", "Commissions", "Shop", "About", "Contact"];
+    const navItems = ["Home", "Gallery", "Commissions", "Store", "About", "Contact"];
 
     // Refined Dark Color Palette for Sub-routes (Replacing harsh stark white)
     const theme = {

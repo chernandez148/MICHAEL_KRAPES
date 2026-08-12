@@ -1,18 +1,21 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import ArtistHero from "./ArtistHero";
-import ArtistAbout from "./ArtistAbout"; // Our new about page component
-import WorksSection from "./WorksSection";
-import Navbar from "./Navbar";
+import RootLayout from "./components/layout/RootLayout";
+import Home from "./routes/Home";
+import About from "./routes/About";
+import Store from "./routes/Store";
+import Cart from "./routes/Cart";
 
 export default function App() {
   return (
     <main>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<ArtistHero />} />
-        <Route path="/about" element={<ArtistAbout />} />
-        <Route path="/works" element={<WorksSection />} />
+        <Route path="/" element={<RootLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/store" element={<Store />} />
+        <Route path="/cart" element={<Cart />} />
+      </Route>
       </Routes>
     </main>
   );

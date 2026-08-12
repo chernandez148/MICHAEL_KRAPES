@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "./redux/slices/cartSlice";
+import { removeFromCart } from "../redux/slices/cartSlice";
 
 export default function Cart() {
     const dispatch = useDispatch();
