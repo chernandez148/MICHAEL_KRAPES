@@ -11,6 +11,13 @@ import OrderStatus from "./routes/OrderStatus";
 import About from "./routes/About";
 import Contact from "./routes/Contact";
 import NotFound from "./routes/NotFound";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminLogin from "./routes/admin/Login";
+import Dashboard from "./routes/admin/Dashboard";
+import AdminOrders from "./routes/admin/Orders";
+import AdminOrderDetail from "./routes/admin/OrderDetail";
+import AdminProducts from "./routes/admin/Products";
+import ProductForm from "./routes/admin/ProductForm";
 
 export default function App() {
   return (
@@ -27,6 +34,17 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
+      </Route>
+
+      {/* Studio admin — its own layout, no public navbar/footer */}
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="orders" element={<AdminOrders />} />
+        <Route path="orders/:id" element={<AdminOrderDetail />} />
+        <Route path="products" element={<AdminProducts />} />
+        <Route path="products/new" element={<ProductForm />} />
+        <Route path="products/:id" element={<ProductForm />} />
       </Route>
     </Routes>
   );
