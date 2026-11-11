@@ -1,0 +1,29 @@
+// src/services/api.ts
+import axios from 'axios';
+
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Request Interceptor: Attach Auth Token
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Response Interceptor: Global Error Handling
+api.interceptors.response.use(
+  (response) => response.data, // Unwrap data automatically
+  (error) => {
+    if (error.response?.status === 401) {
+      // Handle logout / token refresh
+    }
+    return Promise.reject(error);
+  }
+);

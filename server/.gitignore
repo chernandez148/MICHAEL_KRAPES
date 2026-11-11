@@ -1,0 +1,7 @@
+venv/
+.env
+__pycache__/
+*.pyc
+
+# Tracked in its own repo (MICHAEL_KRAPES_API)
+app/
