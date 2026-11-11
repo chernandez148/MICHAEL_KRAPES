@@ -1,23 +1,28 @@
 import React, { useState } from "react";
+import { sendContactMessage } from "../../../services/contact";
 
 const STUDIO_EMAIL = "drkrapes@gmail.com";
 
-// No mail server is configured yet, so the form opens the visitor's email
-// app with the message pre-filled and addressed to the studio.
+type Status = "idle" | "sending" | "sent" | "error";
 function ContactForm({ defaultSubject = "Website inquiry" }: { defaultSubject?: string }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
+    website: "", // honeypot — hidden from people, filled in by bots
   });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = `${defaultSubject} — ${formData.name}`;
-    const body = `${formData.message}\n\n— ${formData.name}\n${formData.email}`;
-    window.location.href = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    setStatus("sending");
+    try {
+      await sendContactMessage({ ...formData, subject: defaultSubject });
+      setStatus("sent");
+      setFormData({ name: "", email: "", message: "", website: "" });
+    } catch {
+      setStatus("error");
+    }
   };
   return (
     <div
@@ -62,7 +67,7 @@ function ContactForm({ defaultSubject = "Website inquiry" }: { defaultSubject?: 
 
       <form
         onSubmit={handleSubmit}
-        className="lg:col-span-8 flex flex-col gap-10 w-full"
+        className="lg:col-span-8 flex flex-col gap-10 w-full relative"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="flex flex-col gap-1 relative">
@@ -111,17 +116,35 @@ function ContactForm({ defaultSubject = "Website inquiry" }: { defaultSubject?: 
             }
           />
         </div>
+        <div className="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
+          <label htmlFor="contact-website">Website</label>
+          <input
+            id="contact-website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={formData.website}
+            onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+          />
+        </div>
         <div className="flex flex-col md:flex-row md:items-center justify-end gap-4 pt-4">
-          {sent && (
-            <p role="status" className="text-[11px] font-light tracking-wide text-white/50 m-0">
-              Your email app should open with the message ready to send. If it didn't, write to {STUDIO_EMAIL}.
+          {status === "sent" && (
+            <p role="status" className="text-[11px] font-light tracking-wide text-[#c8a96e] m-0">
+              Thank you — your message was sent. The studio will be in touch soon.
+            </p>
+          )}
+          {status === "error" && (
+            <p role="alert" className="text-[11px] font-light tracking-wide text-red-300/90 m-0">
+              Your message couldn't be sent. Please email{" "}
+              <a href={`mailto:${STUDIO_EMAIL}`} className="text-red-200 underline">{STUDIO_EMAIL}</a> directly.
             </p>
           )}
           <button
             type="submit"
-            className="w-full md:w-auto px-10 py-3.5 bg-[#c8a96e] text-[#0a0a0a] font-outfit font-normal text-xs tracking-[0.25em] uppercase transition-all duration-300 hover:bg-[#d4b87a] active:scale-[0.98] cursor-pointer border-none"
+            disabled={status === "sending"}
+            className="w-full md:w-auto px-10 py-3.5 bg-[#c8a96e] text-[#0a0a0a] font-outfit font-normal text-xs tracking-[0.25em] uppercase transition-all duration-300 hover:bg-[#d4b87a] active:scale-[0.98] cursor-pointer border-none disabled:opacity-50 disabled:cursor-wait"
           >
-            Send Message
+            {status === "sending" ? "Sending…" : "Send Message"}
           </button>
         </div>
       </form>

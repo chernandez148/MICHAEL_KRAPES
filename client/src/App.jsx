@@ -7,6 +7,7 @@ import Store from "./routes/Store";
 import ProductDetail from "./routes/ProductDetail";
 import Cart from "./routes/Cart";
 import OrderConfirmation from "./routes/OrderConfirmation";
+import OrderStatus from "./routes/OrderStatus";
 import About from "./routes/About";
 import Contact from "./routes/Contact";
 import NotFound from "./routes/NotFound";
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="store/:id" element={<ProductDetail />} />
         <Route path="cart" element={<Cart />} />
         <Route path="order-confirmation" element={<OrderConfirmation />} />
+        <Route path="orders/:token" element={<OrderStatus />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
