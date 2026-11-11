@@ -24,6 +24,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-outfit flex flex-col md:flex-row">
+      <AdminHead />
       <aside className="md:w-56 md:min-h-screen shrink-0 border-b md:border-b-0 md:border-r border-white/10 bg-[#0e0e0e] flex md:flex-col">
         <Link to="/admin" className="font-bebas text-2xl tracking-[0.18em] text-white no-underline px-6 py-5 md:py-8 shrink-0">
           MK <span className="text-[#c8a96e] text-sm tracking-[0.3em] align-middle">STUDIO</span>
@@ -68,6 +69,16 @@ export default function AdminLayout() {
         <Outlet />
       </main>
     </div>
+  );
+}
+
+// React 19 hoists these into <head>: keeps admin pages out of search results.
+export function AdminHead() {
+  return (
+    <>
+      <title>Studio Admin — Michael Krapes</title>
+      <meta name="robots" content="noindex, nofollow" />
+    </>
   );
 }
 

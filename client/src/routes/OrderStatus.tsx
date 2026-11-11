@@ -54,6 +54,7 @@ export default function OrderStatus() {
 
   return (
     <>
+      <meta name="robots" content="noindex, nofollow" />
       <Header breadcrumbs={`ORDER #${order.number}`} title="YOUR ORDER" />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 animate-reveal">

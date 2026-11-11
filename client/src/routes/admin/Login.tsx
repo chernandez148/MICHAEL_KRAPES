@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { adminLogin, apiError, getAdminToken } from "../../services/admin";
-import { fieldClass, labelClass, primaryButton } from "../../components/admin/AdminLayout";
+import { AdminHead, fieldClass, labelClass, primaryButton } from "../../components/admin/AdminLayout";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] font-outfit flex items-center justify-center px-4">
+      <AdminHead />
       <form onSubmit={submit} className="w-full max-w-sm border border-white/10 bg-[#111111] p-8 flex flex-col gap-6">
         <div>
           <span className="font-bebas text-2xl tracking-[0.18em] text-white">
